@@ -6,14 +6,18 @@ from .models import Article,Classify
 from django.shortcuts import get_object_or_404
 from comments.forms import CommentsForm
 import markdown
+from django.views.generic import ListView
 
 from django.http import HttpResponse
 
 # Create your views here.
 #主页
-def index(request):
-    post_list = Article.objects.all().order_by('-create_time')
-    return render(request,'blog/index.html',context={'post_list':post_list})
+class IndexView(ListView):
+    model = Article
+    template_name = 'blog/index.html'
+    context_object_name = 'post_list'
+
+
 #文章详情
 def detail(request,pk):
     post = get_object_or_404(Article,pk=pk)
