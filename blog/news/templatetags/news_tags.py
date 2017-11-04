@@ -1,4 +1,4 @@
-from ..models import Article,Classify
+from ..models import Article,Classify,Tag
 from django import template
 register = template.Library()
 @register.simple_tag
@@ -10,3 +10,6 @@ def archives():
 @register.simple_tag
 def get_categories():
     return Classify.objects.all()
+@register.simple_tag
+def get_tag():
+    return Tag.objects.all()

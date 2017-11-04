@@ -21,16 +21,14 @@ class Classify(models.Model):
 
 class Article(models.Model):
 
-    title = models.CharField('标题',max_length=100)
+    title = models.CharField('标题',max_length=10000)
     body = models.TextField('正文')
     create_time = models.DateTimeField('创建时间',auto_now_add=True)
     update_time = models.DateTimeField('更新时间',auto_now=True)
     excerpt = models.CharField('摘要',max_length=200,blank=True)
     classifies= models.ForeignKey(Classify)
-    tags = models.ManyToManyField(Tag,blank=True)
+    tags = models.ManyToManyField(Tag)
     auth = models.ForeignKey(User)
-    point_good = models.IntegerField(default=0)
-    view_count = models.IntegerField(default=0)
     views = models.PositiveIntegerField(default=0)
 
     def get_absolute_url(self):
